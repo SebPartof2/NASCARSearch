@@ -32,24 +32,28 @@
       event.preventDefault();
       const driverNumber = document.getElementById('driverNumber').value;
 
-      // Load JSON file
-      const response = await fetch('files.json');
-      const data = await response.json();
+      try {
+        // Load JSON file
+        const response = await fetch('files.json');
+        if (!response.ok) throw new Error('Failed to fetch data');
+        const data = await response.json();
 
-      // Search for the driver by number
-      const driver = data.find(d => d["Driver Number"] === driverNumber);
+        // Search for the driver by number
+        const driver = data.find(d => d["Driver Number"] === driverNumber.toString());
 
-      // Display the results
-      const resultsDiv = document.getElementById('results');
-      if (!driver) {
-        resultsDiv.innerHTML = `<p>Driver not found.</p>`;
-      } else {
-        resultsDiv.innerHTML = `
-          <h2>${driver.Name}</h2>
-          <p><strong>Team:</strong> ${driver.Team}</p>
-        
-       
-        `;
+        // Display the results
+        const resultsDiv = document.getElementById('results');
+        if (!driver) {
+          resultsDiv.innerHTML = `<p>Driver not found.</p>`;
+        } else {
+          resultsDiv.innerHTML = `
+            <h2>${driver.Name}</h2>
+            <p><strong>Team:</strong> ${driver.Team}</p>
+          `;
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('results').innerHTML = `<p>Error loading data. Please try again later.</p>`;
       }
     });
   </script>
