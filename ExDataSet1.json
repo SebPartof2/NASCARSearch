@@ -1,0 +1,26 @@
+[
+  {
+    "Driver Number": "24",
+    "Name": "William Byron",
+    "Team": "Hendrick Motorsports",
+    "Wins": "10",
+    "Top 10 Finishes": "30",
+    "Recent Race": "Atlanta"
+  },
+  {
+    "Driver Number": "11",
+    "Name": "Denny Hamlin",
+    "Team": "Joe Gibbs Racing",
+    "Wins": "50",
+    "Top 10 Finishes": "200",
+    "Recent Race": "Phoenix"
+  },
+  {
+    "Driver Number": "1",
+    "Name": "Ross Chastain",
+    "Team": "Trackhouse Racing",
+    "Wins": "5",
+    "Top 10 Finishes": "20",
+    "Recent Race": "Talladega"
+  }
+]
