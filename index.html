@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NASCAR Driver Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    #results {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 15px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>NASCAR Driver Search</h1>
+  <form id="searchForm">
+    <label for="driverNumber">Enter Driver Number:</label>
+    <input type="number" id="driverNumber" required>
+    <button type="submit">Search</button>
+  </form>
+  <div id="results"></div>
 
+  <script>
+    document.getElementById('searchForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const driverNumber = document.getElementById('driverNumber').value;
+
+      // Load JSON file
+      const response = await fetch('ExDataSet1.json');
+      const data = await response.json();
+
+      // Search for the driver by number
+      const driver = data.find(d => d["Driver Number"] === driverNumber);
+
+      // Display the results
+      const resultsDiv = document.getElementById('results');
+      if (!driver) {
+        resultsDiv.innerHTML = `<p>Driver not found.</p>`;
+      } else {
+        resultsDiv.innerHTML = `
+          <h2>${driver.Name}</h2>
+          <p><strong>Team:</strong> ${driver.Team}</p>
+          <p><strong>Wins:</strong> ${driver.Wins}</p>
+          <p><strong>Top 10 Finishes:</strong> ${driver["Top 10 Finishes"]}</p>
+          <p><strong>Recent Race:</strong> ${driver["Recent Race"]}</p>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>
